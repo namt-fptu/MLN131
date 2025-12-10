@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react';
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { Navbar } from './components/Navbar';
-import { Footer } from './components/Footer';
-import { Home } from './pages/Home';
-import { History } from './pages/History';
-import { Library } from './pages/Library';
-import { Quiz } from './pages/Quiz';
-import { Blog } from './pages/Blog';
-import { Quotes } from './pages/Quotes';
-import { Mindmap } from './pages/Mindmap';
-import { Ask } from './pages/Ask';
+import React, { useEffect } from "react";
+import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
+import { Home } from "./pages/Home";
+import { History } from "./pages/History";
+import { Library } from "./pages/Library";
+import { Quiz } from "./pages/Quiz";
+import { Blog } from "./pages/Blog";
+import { Quotes } from "./pages/Quotes";
+import { Mindmap } from "./pages/Mindmap";
+import { Ask } from "./pages/Ask";
 
 // Register GSAP plugins
-if (typeof window !== 'undefined' && window.gsap && window.ScrollTrigger) {
+if (typeof window !== "undefined" && window.gsap && window.ScrollTrigger) {
   window.gsap.registerPlugin(window.ScrollTrigger);
 }
 
