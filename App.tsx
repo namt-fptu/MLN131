@@ -11,6 +11,11 @@ import { Quotes } from './pages/Quotes';
 import { Mindmap } from './pages/Mindmap';
 import { Ask } from './pages/Ask';
 
+// Register GSAP plugins
+if (typeof window !== 'undefined' && window.gsap && window.ScrollTrigger) {
+  window.gsap.registerPlugin(window.ScrollTrigger);
+}
+
 // Scroll to top on route change wrapper
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -23,8 +28,12 @@ const ScrollToTop = () => {
 const App: React.FC = () => {
   // Global GSAP Config if needed
   useEffect(() => {
+    console.log("App mounted");
     if (window.gsap && window.ScrollTrigger) {
+      console.log("GSAP registered");
       window.gsap.registerPlugin(window.ScrollTrigger);
+    } else {
+      console.warn("GSAP not found on window");
     }
   }, []);
 

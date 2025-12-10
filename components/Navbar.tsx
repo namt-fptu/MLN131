@@ -19,13 +19,16 @@ export const Navbar: React.FC = () => {
   useEffect(() => {
     // GSAP animation for nav appearance
     if (window.gsap) {
-      window.gsap.from(navRef.current, {
-        y: -100,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-        delay: 0.5
-      });
+      const ctx = window.gsap.context(() => {
+        window.gsap.from(navRef.current, {
+          y: -100,
+          opacity: 0,
+          duration: 1,
+          ease: 'power3.out',
+          delay: 0.5
+        });
+      }, navRef);
+      return () => ctx.revert();
     }
   }, []);
 

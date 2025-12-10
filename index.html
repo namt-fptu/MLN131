@@ -19,7 +19,7 @@
             colors: {
               'cnxh-black': '#000000',
               'cnxh-gray': '#1E1E1E',
-              'cnxh-red': '#800020', // Burgundy
+              'cnxh-red': '#EF4444', // Brighter Red for visibility
               'cnxh-light': '#E0E0E0',
             },
             fontFamily: {
@@ -34,19 +34,9 @@
     <!-- GSAP & ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script type="importmap">
-{
-  "imports": {
-    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.10.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-    "react/": "https://aistudiocdn.com/react@^19.2.1/",
-    "react": "https://aistudiocdn.com/react@^19.2.1",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.32.0"
-  }
-}
-</script>
-</head>
+  </head>
   <body class="bg-cnxh-black text-cnxh-light antialiased overflow-x-hidden selection:bg-cnxh-red selection:text-white">
     <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>

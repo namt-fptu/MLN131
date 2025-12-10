@@ -9,55 +9,58 @@ export const Home: React.FC = () => {
   useEffect(() => {
     if (!window.gsap || !window.ScrollTrigger) return;
 
-    const tl = window.gsap.timeline();
+    const ctx = window.gsap.context(() => {
+      const tl = window.gsap.timeline();
 
-    // Hero Text Stagger
-    tl.from(".hero-line", {
-      y: 100,
-      opacity: 0,
-      duration: 1.2,
-      stagger: 0.2,
-      ease: "power4.out"
-    });
+      // Hero Text Stagger
+      tl.from(".hero-line", {
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.2,
+        ease: "power4.out"
+      });
 
-    // Parallax Effect
-    window.gsap.to(".hero-bg", {
-      yPercent: 50,
-      ease: "none",
-      scrollTrigger: {
-        trigger: heroRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true
-      }
-    });
-
-    // Quote Typing Effect Simulation (Staggered Opacity)
-    const quoteChars = quoteRef.current?.querySelectorAll('.char');
-    if (quoteChars) {
-      window.gsap.to(quoteChars, {
-        opacity: 1,
-        duration: 0.05,
-        stagger: 0.05,
+      // Parallax Effect
+      window.gsap.to(".hero-bg", {
+        yPercent: 50,
+        ease: "none",
         scrollTrigger: {
-          trigger: quoteRef.current,
-          start: "top 70%",
+          trigger: heroRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true
         }
       });
-    }
 
-    // Feature Cards Stagger
-    window.gsap.from(".feature-card", {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.2,
-      scrollTrigger: {
-        trigger: featureRef.current,
-        start: "top 80%",
+      // Quote Typing Effect Simulation (Staggered Opacity)
+      const quoteChars = quoteRef.current?.querySelectorAll('.char');
+      if (quoteChars && quoteChars.length > 0) {
+        window.gsap.to(quoteChars, {
+          opacity: 1,
+          duration: 0.05,
+          stagger: 0.05,
+          scrollTrigger: {
+            trigger: quoteRef.current,
+            start: "top 70%",
+          }
+        });
       }
-    });
 
+      // Feature Cards Stagger
+      window.gsap.from(".feature-card", {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: featureRef.current,
+          start: "top 80%",
+        }
+      });
+    }, heroRef); // Scope to heroRef or a wrapper ref
+
+    return () => ctx.revert(); // Cleanup
   }, []);
 
   const handleCardHover = (e: React.MouseEvent<HTMLDivElement>, enter: boolean) => {
@@ -90,12 +93,12 @@ export const Home: React.FC = () => {
 
         {/* Content */}
         <div ref={heroTextRef} className="relative z-10 text-center px-6 max-w-4xl">
-          <p className="hero-line text-cnxh-red text-sm md:text-base font-bold tracking-[0.3em] uppercase mb-6">Giáo dục Chính trị & Tư tưởng</p>
-          <h1 className="hero-line font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-8">
+          <p className="hero-line text-red-500 text-sm md:text-base font-bold tracking-[0.3em] uppercase mb-6 drop-shadow-md">Giáo dục Chính trị & Tư tưởng</p>
+          <h1 className="hero-line font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-8 text-white drop-shadow-lg">
             Chủ nghĩa <br /> 
             <span className="italic font-light text-white/90">Xã hội Khoa học</span>
           </h1>
-          <p className="hero-line text-gray-300 max-w-2xl mx-auto text-lg md:text-xl font-light leading-relaxed">
+          <p className="hero-line text-gray-200 max-w-2xl mx-auto text-lg md:text-xl font-light leading-relaxed drop-shadow-md">
             Khám phá nền tảng lý luận, sứ mệnh lịch sử và giá trị thời đại của học thuyết Mác - Lênin trong thế kỷ 21.
           </p>
           <div className="hero-line mt-12">

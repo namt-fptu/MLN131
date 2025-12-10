@@ -30,33 +30,36 @@ export const History: React.FC = () => {
   useEffect(() => {
     if (!window.gsap || !window.ScrollTrigger) return;
 
-    // Line drawing animation
-    window.gsap.from(".timeline-line", {
-      scaleY: 0,
-      transformOrigin: "top center",
-      duration: 2,
-      ease: "power2.inOut",
-      scrollTrigger: {
-        trigger: ".timeline-container",
-        start: "top 60%",
-      }
-    });
-
-    // Events appearing
-    const items = document.querySelectorAll('.timeline-item');
-    items.forEach((item, index) => {
-      const isEven = index % 2 === 0;
-      window.gsap.from(item, {
-        x: isEven ? -50 : 50,
-        opacity: 0,
-        duration: 1,
+    const ctx = window.gsap.context(() => {
+      // Line drawing animation
+      window.gsap.from(".timeline-line", {
+        scaleY: 0,
+        transformOrigin: "top center",
+        duration: 2,
+        ease: "power2.inOut",
         scrollTrigger: {
-          trigger: item,
-          start: "top 80%",
+          trigger: ".timeline-container",
+          start: "top 60%",
         }
+      });
+
+      // Events appearing
+      const items = document.querySelectorAll('.timeline-item');
+      items.forEach((item, index) => {
+        const isEven = index % 2 === 0;
+        window.gsap.from(item, {
+          x: isEven ? -50 : 50,
+          opacity: 0,
+          duration: 1,
+          scrollTrigger: {
+            trigger: item,
+            start: "top 80%",
+          }
+        });
       });
     });
 
+    return () => ctx.revert();
   }, []);
 
   return (

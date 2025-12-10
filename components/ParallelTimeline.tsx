@@ -107,37 +107,41 @@ export const ParallelTimeline: React.FC = () => {
 
   useEffect(() => {
     if (window.gsap && window.ScrollTrigger && containerRef.current && trackContainerRef.current) {
-      const tl = window.gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "+=3000", // Scroll distance
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1
-        }
-      });
+      const ctx = window.gsap.context(() => {
+        const tl = window.gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "+=3000", // Scroll distance
+            scrub: 1,
+            pin: true,
+            anticipatePin: 1
+          }
+        });
 
-      // Deep Parallax: Move tracks at different speeds/distances
-      // World History (Top) - Slower
-      tl.to(worldRef.current, { x: -2000, ease: "none" }, 0);
-      
-      // Philosophy (Middle) - Fastest (Center focus)
-      tl.to(philRef.current, { x: -3500, ease: "none" }, 0);
-      
-      // Vietnam (Bottom) - Medium
-      tl.to(vnRef.current, { x: -2500, ease: "none" }, 0);
+        // Deep Parallax: Move tracks at different speeds/distances
+        // World History (Top) - Slower
+        tl.to(worldRef.current, { x: -2000, ease: "none" }, 0);
+        
+        // Philosophy (Middle) - Fastest (Center focus)
+        tl.to(philRef.current, { x: -3500, ease: "none" }, 0);
+        
+        // Vietnam (Bottom) - Medium
+        tl.to(vnRef.current, { x: -2500, ease: "none" }, 0);
 
-      // Intro Animation for the whole section
-      window.gsap.from(trackContainerRef.current, {
-        opacity: 0,
-        scale: 0.9,
-        duration: 1,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-        }
-      });
+        // Intro Animation for the whole section
+        window.gsap.from(trackContainerRef.current, {
+          opacity: 0,
+          scale: 0.9,
+          duration: 1,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+          }
+        });
+      }, containerRef);
+      
+      return () => ctx.revert();
     }
   }, []);
 
